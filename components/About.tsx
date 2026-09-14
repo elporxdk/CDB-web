@@ -6,6 +6,14 @@ export default function About() {
       <div className="wrap">
         <div className="about-grid">
           <div className="about-art">
+            <div className="about-sparks" aria-hidden="true">
+              <span className="about-spark" />
+              <span className="about-spark" />
+              <span className="about-spark" />
+              <span className="about-spark" />
+              <span className="about-spark" />
+              <span className="about-spark" />
+            </div>
             <Image
               src="/Aguila2.png"
               alt="Mascota de Di Astrea volando con la banda del consejo estudiantil"

@@ -380,6 +380,23 @@ nav.links a:hover {
   margin: 0 auto;
   filter: drop-shadow(0 22px 42px rgba(0, 0, 0, 0.45));
 }
+.about-sparks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.about-spark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  background: var(--gold-300);
+  border-radius: 50%;
+  box-shadow: 0 0 8px 2px rgba(242, 212, 121, 0.6);
+  opacity: 0;
+}
 .stat-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

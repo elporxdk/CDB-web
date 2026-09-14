@@ -14,17 +14,17 @@ export default function ComingSoon() {
           </h2>
 
           <p>
-            Un espacio abierto donde el estudiantado podrá proponer, debatir y
-            votar las ideas que mueven al colegio. No es un tablero de
+            Un espacio abierto donde el estudiante podrá mostrar sus talentos al mundo y expresarse con aquello que le apasiona. 
+            No es un tablero de
             avisos: es la mesa donde se sienta quien quiere construir algo
             real. Lo estamos construyendo para que tu voz no se quede en el
             patio.
           </p>
 
           <p className="cs-cta">
-            Ayúdanos a seguir desarrollando soluciones y cambios — la mejor
+            Ayúdanos a seguir desarrollando soluciones y cambios, la mejor
             forma de hacerlo es contándonos qué necesitas.{" "}
-            <a href="#buzon">Deja tu idea en el buzón</a> y sé de los primeros
+            <a href="#buzon">Deja tu idea en el buzón y vota por el Amarillo</a> para ser de los primeros
             en marcar la diferencia.
           </p>
 

@@ -70,6 +70,7 @@ export default function ScrollAnimations() {
           },
         }
       );
+      // Flotación vertical suave (aleteo).
       gsap.to(".about-art img", {
         y: -14,
         rotate: 2,
@@ -77,6 +78,53 @@ export default function ScrollAnimations() {
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
+      });
+      // Parallax sutil: el águila sube más despacio que el contenido al hacer scroll.
+      gsap.to(".about-art img", {
+        yPercent: -12,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".about",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+      // Pulso de brillo dorado en la sombra del águila.
+      gsap.to(".about-art img", {
+        filter: "drop-shadow(0 22px 42px rgba(212,167,44,0.55))",
+        duration: 2.6,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+      // Partículas doradas orbitando el águila.
+      const particles = gsap.utils.toArray<HTMLElement>(".about-spark");
+      particles.forEach((spark, i) => {
+        const radius = 90 + (i % 3) * 28;
+        const speed = 6 + (i % 4) * 2;
+        const angle0 = (i / particles.length) * Math.PI * 2;
+        const state = { angle: angle0 };
+
+        gsap.to(state, {
+          angle: angle0 + Math.PI * 2,
+          duration: speed,
+          repeat: -1,
+          ease: "none",
+          onUpdate: () => {
+            gsap.set(spark, {
+              x: Math.cos(state.angle) * radius,
+              y: Math.sin(state.angle) * radius,
+            });
+          },
+        });
+        gsap.to(spark, {
+          opacity: 0.2 + (i % 3) * 0.2,
+          duration: 1.5 + (i % 3),
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
       });
 
       // Encabezados de sección.
