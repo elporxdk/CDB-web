@@ -1,0 +1,33 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"main": ".open-next/worker.js",
+	// Must match the Worker name of the Cloudflare project. Bindings that point at
+	// this Worker by name (see the self-reference binding below) are resolved
+	// against it on deploy, so a mismatch here fails the deploy.
+	"name": "cdb-web",
+	"compatibility_date": "2026-09-11",
+	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+	"assets": {
+		"directory": ".open-next/assets",
+		"binding": "ASSETS"
+	},
+	"images": {
+		// Enable image optimization
+		// see https://opennext.js.org/cloudflare/howtos/image
+		"binding": "IMAGES"
+	},
+	"observability": {
+		"enabled": true
+	}
+	// The site is fully prerendered, so it needs neither the R2 incremental cache
+	// nor the revalidation queue. If ISR / on-demand revalidation is added later,
+	// set up caching as described in https://opennext.js.org/cloudflare/caching and
+	// add the self-reference service binding, whose "service" MUST be "cdb-web":
+	//
+	// "services": [
+	// 	{ "binding": "WORKER_SELF_REFERENCE", "service": "cdb-web" }
+	// ],
+	// "r2_buckets": [
+	// 	{ "binding": "NEXT_INC_CACHE_R2_BUCKET", "bucket_name": "cdb-web-opennext-cache" }
+	// ]
+}
