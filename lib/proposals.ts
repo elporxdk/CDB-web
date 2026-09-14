@@ -94,7 +94,7 @@ export const areas: AreaBlock[] = [
         title: "Padrinos lectores",
         description:
           "Estudiantes de bachillerato leen a los más pequeños una vez al mes, dentro del programa de lectura.",
-        status: "denegada",
+        status: "en-desarrollo",
         image: "/PadrinosLectores.jpg",
       },
     ],

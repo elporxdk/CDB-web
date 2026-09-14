@@ -1,7 +1,8 @@
 import Image from "next/image";
 
-// TODO: reemplaza esta URL por el link real del formulario (Google Forms, Typeform, etc.)
-const FORM_URL = "#";
+// Formulario de Google Forms para recibir ideas del estudiantado.
+const FORM_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSc9xTSulg6FHnbtoE8uX7XOMGijqhvXJiL9MVxS5ryOwu-PrQ/viewform?usp=publish-editor";
 
 export default function Buzon() {
   return (
