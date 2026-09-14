@@ -31,8 +31,8 @@ export default function Footer() {
           <div className="footer-col">
             <h5>Comunidad</h5>
             <a href="#buzon">Buzón de ideas</a>
-            <a href="#consejo">Informes trimestrales</a>
-            <a href="#consejo">Sobre el consejo</a>
+            <a href="#foro">Foro (próximamente)</a>
+            <a href="#objetivos">Sobre el consejo</a>
           </div>
         </div>
 

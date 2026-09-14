@@ -7,7 +7,7 @@ export const areas: AreaBlock[] = [
     blurb: "Lo que el estudiante aprende no se queda en el cuaderno, sino que se trabaje hasta volverse experiencia",
     proposals: [
       {
-        title: "Plataforma AD ASTRA",
+        title: "Plataforma Di Astrea",
         description:
           "Ecosistema digital exclusivo para estudiantes del colegio: metas del Consejo con su estado de avance, calendario enlazado a notificaciones, registro para torneos y eventos,",
         status: "aprobada",
@@ -28,9 +28,9 @@ export const areas: AreaBlock[] = [
     blurb: "Espacio para el talento que no cabe en el salón de clases.",
     proposals: [
       {
-        title: "RED ASTRA",
+        title: "RED ASTREA",
         description:
-          "Foro anónimo dentro de AD ASTRA con moderación estudiantil y acompañamiento de un docente. Es un espacio para pedir consejo, compartir experiencias y hablar de lo que no se puede decir en voz alta.",
+          "Foro anónimo dentro de Di Astrea con moderación estudiantil y acompañamiento de un docente. Es un espacio para pedir consejo, compartir experiencias y hablar de lo que no se puede decir en voz alta.",
         status: "en-desarrollo",
         image: "/ForoAstra.jpg",
       },
@@ -51,7 +51,7 @@ export const areas: AreaBlock[] = [
       {
         title: "Radio Don Bosco",
         description:
-          "Cabina estudiantil activa durante los eventos institucionales, con entrevistas a invitados, muestra de talentos estudiantiles. La programación se anuncia en AD ASTRA.",
+          "Cabina estudiantil activa durante los eventos institucionales, con entrevistas a invitados, muestra de talentos estudiantiles. La programación se anuncia en Di Astrea.",
         status: "en-desarrollo",
         image: "/RadioDonBosco.jpeg",
       },

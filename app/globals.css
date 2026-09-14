@@ -640,6 +640,109 @@ blockquote {
   line-height: 1.45;
 }
 
+/* ---------- COMING SOON (foro) ---------- */
+.coming-soon {
+  padding: 120px 0;
+  border-top: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.coming-soon-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.coming-soon-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 16px;
+  border: 1px solid var(--gold-500);
+  border-radius: 20px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-400);
+  margin-bottom: 28px;
+}
+.coming-soon-badge .dot {
+  width: 6px;
+  height: 6px;
+  background: var(--gold-500);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.4); }
+}
+.coming-soon h2 {
+  font-size: clamp(32px, 5vw, 48px);
+  line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 22px;
+}
+.cs-accent {
+  background: linear-gradient(100deg, var(--gold-300), var(--gold-500));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.coming-soon p {
+  font-size: 16.5px;
+  color: var(--slate);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.cs-cta {
+  font-size: 17px !important;
+  color: var(--cream) !important;
+}
+.cs-cta a {
+  color: var(--gold-400);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.cs-cta a:hover {
+  color: var(--gold-300);
+}
+/* Orbita decorativa detrás del texto. */
+.cs-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 520px;
+  height: 520px;
+  z-index: 0;
+  pointer-events: none;
+}
+.cs-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  background: var(--gold-500);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 24px 6px rgba(212, 167, 44, 0.5);
+}
+.cs-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 1px solid rgba(212, 167, 44, 0.15);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.cs-ring-1 { width: 200px; height: 200px; }
+.cs-ring-2 { width: 360px; height: 360px; }
+.cs-ring-3 { width: 520px; height: 520px; }
+
 /* ---------- STATEMENT (slide fijado) ---------- */
 .statement {
   min-height: 100vh;

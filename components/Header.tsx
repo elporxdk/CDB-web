@@ -7,6 +7,7 @@ const LINKS = [
   { href: "#propuestas", label: "Propuestas" },
   { href: "#nombre", label: "El nombre" },
   { href: "#objetivos", label: "Objetivos" },
+  { href: "#foro", label: "Foro" },
 ];
 
 export default function Header() {

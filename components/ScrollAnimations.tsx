@@ -267,6 +267,63 @@ export default function ScrollAnimations() {
         yoyo: true,
         ease: "sine.inOut",
       });
+
+      // Próximamente — foro de Di Astrea.
+      gsap.from(".coming-soon-badge", {
+        opacity: 0,
+        y: -18,
+        duration: 0.6,
+        ease: "power2.out",
+        scrollTrigger: { trigger: ".coming-soon", start: "top 80%" },
+      });
+      gsap.from(".coming-soon h2", {
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: { trigger: ".coming-soon", start: "top 78%" },
+      });
+      gsap.from(".coming-soon p", {
+        opacity: 0,
+        y: 24,
+        duration: 0.7,
+        stagger: 0.15,
+        ease: "power2.out",
+        scrollTrigger: { trigger: ".coming-soon", start: "top 75%" },
+      });
+      // Las órbitas crecen y rotan al entrar.
+      gsap.fromTo(
+        ".cs-orbit",
+        { scale: 0.4, opacity: 0 },
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 1.4,
+          ease: "power2.out",
+          scrollTrigger: { trigger: ".coming-soon", start: "top 80%" },
+        }
+      );
+      gsap.to(".cs-ring-1", {
+        rotate: 360,
+        duration: 40,
+        repeat: -1,
+        ease: "none",
+        transformOrigin: "50% 50%",
+      });
+      gsap.to(".cs-ring-2", {
+        rotate: -360,
+        duration: 60,
+        repeat: -1,
+        ease: "none",
+        transformOrigin: "50% 50%",
+      });
+      gsap.to(".cs-ring-3", {
+        rotate: 360,
+        duration: 90,
+        repeat: -1,
+        ease: "none",
+        transformOrigin: "50% 50%",
+      });
     });
 
     return () => ctx.revert();
