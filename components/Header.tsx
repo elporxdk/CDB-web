@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 const LINKS = [
@@ -9,6 +10,10 @@ const LINKS = [
   { href: "#objetivos", label: "Objetivos" },
   { href: "#foro", label: "Foro" },
 ];
+
+// Va aparte de LINKS porque no es un ancla de esta página, sino otra ruta: con
+// <Link> Next precarga el foro y no recarga el sitio entero al entrar.
+const FORO = { href: "/foro", label: "RED ASTRA" };
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -36,6 +41,7 @@ export default function Header() {
               {link.label}
             </a>
           ))}
+          <Link href={FORO.href}>{FORO.label}</Link>
           <a href="#buzon" className="nav-cta">
             Buzón de ideas
           </a>
@@ -59,6 +65,9 @@ export default function Header() {
             {link.label}
           </a>
         ))}
+        <Link href={FORO.href} onClick={() => setOpen(false)}>
+          {FORO.label}
+        </Link>
         <a href="#buzon" onClick={() => setOpen(false)}>
           Buzón de ideas
         </a>
