@@ -34,6 +34,11 @@ yarn-error.log*
 .env*
 # .env.example no lleva valores, solo explica cuales hacen falta.
 !.env.example
+# .env.production se puede versionar porque solo debe contener las dos
+# NEXT_PUBLIC_* de Supabase, que de todas formas acaban dentro del JS que
+# descarga cualquier visitante. Ver supabase/README.md.
+# NO pongas aqui nada que no pueda ser publico (jamas la service_role key).
+!.env.production
 
 # vercel
 .vercel

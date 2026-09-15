@@ -46,10 +46,46 @@ mucho que la interfaz lo parezca.
    Sin esto, los enlaces de confirmación y de contraseña nueva llegan al sitio
    pero sin la sesión temporal, y no funcionan.
 
-4. **Copiar las claves** al proyecto: panel → *Project Settings* → *API*. Ver
-   `.env.example` en la raíz. En local van en `.env.local`; en producción, en
-   las variables del proyecto de Cloudflare — y hacen falta **en tiempo de
-   compilación**, porque Next las incrusta en el bundle.
+4. **Copiar las claves** al proyecto: panel → *Project Settings* → *API*. De
+   ahí salen `Project URL` y la clave `anon` / `public`.
+
+   Lo que hay que entender antes de pegarlas en ningún sitio: Next **incrusta**
+   las variables `NEXT_PUBLIC_*` dentro del JavaScript durante `npm run build`.
+   Es decir, **hacen falta en tiempo de compilación**, no de ejecución. Poner la
+   clave solo en las variables de *runtime* del Worker no sirve de nada: el
+   bundle ya se generó sin ella y el foro dirá que no está conectado.
+
+   En local: `.env.local` (ver `.env.example`).
+
+   En producción hay dos caminos, y los dos valen:
+
+   **a) Variables de compilación de Cloudflare** (lo normal)
+
+   Panel de Cloudflare → *Workers & Pages* → el Worker `cdb-web` → *Settings*.
+   Ahí busca la sección de **Build** y, dentro, **«Build variables and
+   secrets»**. Es una lista **distinta** de la de *Variables and Secrets* de
+   runtime, y es la única que ve el `npm run build` que ejecuta Workers Builds.
+   Añade las dos:
+
+   ```
+   NEXT_PUBLIC_SUPABASE_URL        https://TU-PROYECTO.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY   eyJhbGciOi…  (la clave anon)
+   ```
+
+   Después hay que **volver a desplegar**: las variables se aplican en el
+   siguiente build, no en el que ya pasó.
+
+   **b) Versionarlas en el repositorio** (si el panel se hace bolas)
+
+   Crear `.env.production` en la raíz con esas dos líneas y hacer commit. El
+   `.gitignore` ya lo permite de forma explícita. No es una fuga: la clave
+   `anon` **termina dentro del JavaScript que descarga cualquier visitante** de
+   todas formas — se puede comprobar buscándola en el bundle después de
+   compilar. Lo que nunca debe entrar ahí, ni en ningún sitio del repositorio,
+   es la `service_role key`, que se salta RLS entera.
+
+   Ventaja de (b): el despliegue no depende de que nadie recuerde configurar el
+   panel. Ventaja de (a): rotar la clave no necesita un commit.
 
 5. **Nombrar moderación**. El rol no se puede cambiar desde el sitio: la
    política `perfiles_actualizar_propio` lo bloquea a propósito, porque si no
@@ -60,6 +96,42 @@ mucho que la interfaz lo parezca.
    update public.perfiles set rol = 'moderador'
    where id = (select id from auth.users where email = 'quien@donbosco.edu.sv');
    ```
+
+## Entrar por primera vez
+
+Con los pasos de arriba hechos y el sitio redesplegado:
+
+1. Ir a `/auth` → *Crear cuenta*, con nombre, correo y contraseña.
+2. Supabase manda un correo de confirmación. **Hay que abrirlo**: hasta
+   entonces la cuenta existe pero no puede publicar, porque la política
+   `publicaciones_crear` exige `esta_verificado()`. La interfaz lo explica y
+   ofrece reenviar el correo.
+3. Volver al sitio y entrar. Ya se puede publicar, comentar y reaccionar.
+
+### Si el correo no llega
+
+Pasa a menudo, y no es un fallo del foro: el remitente que Supabase da por
+defecto está **muy limitado** (unos pocos correos por hora para todo el
+proyecto) y sus mensajes caen en spam con facilidad. Dos salidas:
+
+- **Para probar ya**: confirmar la cuenta a mano desde el *SQL Editor*. Es
+  exactamente lo que haría el enlace del correo:
+
+  ```sql
+  update auth.users set email_confirmed_at = now()
+  where email = 'quien@donbosco.edu.sv';
+  ```
+
+- **Para abrirlo al colegio**: configurar un SMTP propio en *Authentication* →
+  *Emails* → *SMTP Settings*. Sin eso, en cuanto se registren varios
+  estudiantes seguidos, Supabase dejará de enviar por límite de envíos.
+
+Si se prefiere no pedir confirmación de correo, se puede desactivar en
+*Authentication* → *Sign In / Providers* → *Confirm email*. **Pero eso cambia
+lo que significa «verificado»**: `esta_verificado()` pasaría a ser cierto para
+cualquiera que se registre con un correo inventado, y el foro quedaría abierto
+a cualquiera de fuera del colegio. Si se hace, conviene restringir los dominios
+de correo permitidos.
 
 ## Cómo funciona el anonimato
 
