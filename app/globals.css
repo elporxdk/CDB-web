@@ -1038,3 +1038,504 @@ footer {
   outline: 2px solid var(--gold-400);
   outline-offset: 2px;
 }
+
+/* ==========================================================================
+   RED ASTRA — foro y publicaciones
+   Reutiliza los tokens de arriba: mismo navy, mismo dorado, mismas esquinas
+   de 4px. El foro tiene que parecer parte del sitio, no una pieza pegada.
+   ========================================================================== */
+
+.foro {
+  padding: 56px 0 96px;
+  min-height: 70vh;
+}
+.foro-head {
+  margin-bottom: 28px;
+}
+.foro-head h1 {
+  font-size: clamp(28px, 4vw, 40px);
+  margin-bottom: 10px;
+}
+.foro-lede {
+  color: var(--slate);
+  max-width: 62ch;
+  font-size: 15.5px;
+}
+
+/* ---------- barra de filtros ---------- */
+.foro-barra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.foro-buscador {
+  flex: 1 1 240px;
+  min-width: 0;
+  display: flex;
+  gap: 8px;
+}
+.chip {
+  min-height: 36px;
+  padding: 0 15px;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--line);
+  background: var(--navy-800);
+  color: var(--slate);
+  transition: border-color 0.18s, color 0.18s, background 0.18s;
+}
+.chip:hover {
+  border-color: var(--gold-500);
+  color: var(--cream);
+}
+.chip.is-active {
+  background: var(--gold-500);
+  border-color: var(--gold-500);
+  color: var(--navy-950);
+}
+
+/* ---------- campos ---------- */
+.campo,
+.area {
+  width: 100%;
+  background: var(--navy-900);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  color: var(--cream);
+  font: inherit;
+  font-size: 14.5px;
+  padding: 11px 13px;
+  transition: border-color 0.18s;
+}
+.campo::placeholder,
+.area::placeholder {
+  color: var(--slate-dim);
+}
+.campo:focus,
+.area:focus {
+  outline: none;
+  border-color: var(--gold-500);
+}
+.area {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+.campo-fila {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr auto;
+  margin-bottom: 10px;
+}
+.etiqueta {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--slate);
+  margin-bottom: 6px;
+}
+
+/* ---------- botones ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 18px;
+  border-radius: var(--radius-card);
+  border: 1px solid transparent;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, color 0.18s, opacity 0.18s;
+}
+.btn-oro {
+  background: var(--gold-500);
+  color: var(--navy-950);
+}
+.btn-oro:hover:not(:disabled) {
+  background: var(--gold-400);
+}
+.btn-fantasma {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--cream);
+}
+.btn-fantasma:hover:not(:disabled) {
+  border-color: var(--gold-500);
+  color: var(--gold-400);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ---------- tarjeta de publicación ---------- */
+.pub-lista {
+  display: grid;
+  gap: 14px;
+}
+.pub {
+  background: var(--navy-900);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 20px 22px;
+  transition: border-color 0.18s;
+}
+.pub:hover {
+  border-color: var(--navy-600);
+}
+.pub-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--slate-dim);
+  margin-bottom: 10px;
+}
+.pub-autor {
+  font-weight: 700;
+  color: var(--slate);
+}
+.pub-cat {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--gold-400);
+}
+.pub h2,
+.pub h3 {
+  font-size: 18.5px;
+  line-height: 1.35;
+  margin-bottom: 8px;
+}
+.pub h2 a:hover,
+.pub h3 a:hover {
+  color: var(--gold-400);
+}
+.pub-extracto {
+  color: var(--slate);
+  font-size: 14.5px;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.pub-pie {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+.pub-accion {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: var(--radius-card);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--slate-dim);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.18s, background 0.18s;
+}
+.pub-accion:hover:not(:disabled) {
+  color: var(--cream);
+  background: var(--navy-800);
+}
+.pub-accion.is-on {
+  color: var(--gold-400);
+}
+.pub-accion:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.pub-accion .icono {
+  width: 15px;
+  height: 15px;
+}
+
+/* ---------- distintivos ---------- */
+.distintivo {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.distintivo-mod {
+  background: rgba(212, 167, 44, 0.16);
+  color: var(--gold-400);
+}
+.distintivo-anon {
+  background: rgba(124, 136, 184, 0.18);
+  color: var(--slate);
+}
+.distintivo-oculto {
+  background: rgba(124, 136, 184, 0.18);
+  color: var(--status-no);
+}
+
+/* ---------- avisos ---------- */
+.aviso {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--navy-900);
+  padding: 20px 22px;
+}
+.aviso-oro {
+  border-color: rgba(212, 167, 44, 0.4);
+  background: rgba(212, 167, 44, 0.06);
+}
+.aviso h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+.aviso p {
+  color: var(--slate);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.aviso-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+.aviso-error {
+  border-color: rgba(212, 167, 44, 0.45);
+  color: var(--gold-300);
+  background: rgba(212, 167, 44, 0.08);
+  border-radius: var(--radius-card);
+  padding: 11px 14px;
+  font-size: 13.5px;
+}
+.esqueleto {
+  height: 84px;
+  border-radius: var(--radius-card);
+  background: var(--navy-900);
+  border: 1px solid var(--line);
+  animation: latido 1.4s ease-in-out infinite;
+}
+@keyframes latido {
+  0%, 100% { opacity: 0.45; }
+  50%      { opacity: 0.9; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .esqueleto { animation: none; }
+}
+
+/* ---------- compositor ---------- */
+.compositor {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--navy-900);
+  padding: 20px 22px;
+}
+.compositor h3 {
+  font-size: 16px;
+  margin-bottom: 14px;
+}
+.compositor-pie {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+}
+.pista {
+  font-size: 12.5px;
+  color: var(--slate-dim);
+  margin: 0;
+}
+.casilla {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  color: var(--slate);
+  cursor: pointer;
+  user-select: none;
+}
+.casilla input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--gold-500);
+  cursor: pointer;
+}
+
+/* ---------- detalle y comentarios ---------- */
+.pub-detalle {
+  background: var(--navy-900);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 26px 28px;
+}
+.pub-detalle h1 {
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+.pub-cuerpo {
+  color: var(--cream);
+  font-size: 15.5px;
+  line-height: 1.75;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.hilo {
+  margin-top: 28px;
+}
+.hilo h2 {
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+.comentario {
+  border-left: 2px solid var(--line);
+  padding: 2px 0 2px 16px;
+  margin-bottom: 16px;
+}
+.comentario.es-respuesta {
+  margin-left: 22px;
+}
+.comentario-cuerpo {
+  color: var(--slate);
+  font-size: 14.5px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.comentario-acciones {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+/* ---------- paginación y vacíos ---------- */
+.paginacion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 26px;
+}
+.paginacion span {
+  font-size: 13.5px;
+  color: var(--slate-dim);
+}
+.vacio {
+  text-align: center;
+  padding: 52px 20px;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-card);
+  color: var(--slate-dim);
+}
+.vacio strong {
+  display: block;
+  color: var(--cream);
+  font-family: var(--font-unbounded), sans-serif;
+  margin-bottom: 6px;
+}
+
+/* ---------- autenticación ---------- */
+.auth {
+  padding: 64px 0 96px;
+  display: flex;
+  justify-content: center;
+}
+.auth-caja {
+  width: 100%;
+  max-width: 440px;
+  background: var(--navy-900);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 30px 30px 26px;
+}
+.auth-caja h1 {
+  font-size: 23px;
+  margin-bottom: 6px;
+}
+.auth-caja > p {
+  color: var(--slate);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+.auth-campo {
+  margin-bottom: 14px;
+}
+.auth-pestanas {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.auth-pie {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--slate-dim);
+  text-align: center;
+}
+.auth-pie button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-weight: 700;
+  color: var(--gold-400);
+  cursor: pointer;
+}
+.auth-pie button:hover {
+  text-decoration: underline;
+}
+
+/* ---------- cabecera del foro ---------- */
+.foro-sesion {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--slate);
+}
+
+@media (max-width: 720px) {
+  .wrap {
+    padding: 0 20px;
+  }
+  .campo-fila {
+    grid-template-columns: 1fr;
+  }
+  .pub,
+  .pub-detalle,
+  .compositor,
+  .aviso {
+    padding: 17px 16px;
+  }
+  .comentario.es-respuesta {
+    margin-left: 10px;
+  }
+  .foro-barra {
+    gap: 8px;
+  }
+}
