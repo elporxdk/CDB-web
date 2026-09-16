@@ -9,7 +9,7 @@ export const areas: AreaBlock[] = [
       {
         title: "Plataforma Di Astrea",
         description:
-          "Ecosistema digital exclusivo para estudiantes del colegio: metas del Consejo con su estado de avance, calendario enlazado a notificaciones, registro para torneos y eventos,",
+          "Ecosistema digital exclusivo para estudiantes del colegio: metas del Consejo con su estado de avance, calendario enlazado a notificaciones, registro para torneos y eventos.",
         status: "aprobada",
         image: "/PlataformaDiAstrea.png",
       },
@@ -121,7 +121,7 @@ export const areas: AreaBlock[] = [
       {
         title: "Retos académicos",
         description:
-          "Olimpiadas internas y concursos de conocimiento de multiples rubros entre secciones, sumando puntaje para la Cioa",
+          "Olimpiadas internas y concursos de conocimiento de multiples rubros entre secciones, sumando puntaje para la Copa.",
         status: "en-desarrollo",
         image: "/RetoAcademico.jpg",
       },

@@ -649,7 +649,6 @@ nav.links a:hover {
 blockquote {
   margin: 28px 0 0;
   padding-left: 22px;
-  border-left: 3px solid var(--gold-500);
   font-family: var(--font-unbounded), sans-serif;
   font-weight: 600;
   font-size: 19px;
