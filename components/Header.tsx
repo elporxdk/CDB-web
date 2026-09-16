@@ -11,9 +11,12 @@ const LINKS = [
   { href: "#foro", label: "Foro" },
 ];
 
-// Va aparte de LINKS porque no es un ancla de esta página, sino otra ruta: con
-// <Link> Next precarga el foro y no recarga el sitio entero al entrar.
-const FORO = { href: "/foro", label: "RED ASTRA" };
+// Van aparte de LINKS porque no son anclas de esta página, sino otras rutas:
+// con <Link> Next las precarga y no recarga el sitio entero al entrar.
+const RUTAS = [
+  { href: "/calendario", label: "Calendario" },
+  { href: "/foro", label: "RED ASTRA" },
+];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -41,7 +44,11 @@ export default function Header() {
               {link.label}
             </a>
           ))}
-          <Link href={FORO.href}>{FORO.label}</Link>
+          {RUTAS.map((ruta) => (
+            <Link key={ruta.href} href={ruta.href}>
+              {ruta.label}
+            </Link>
+          ))}
           <a href="#buzon" className="nav-cta">
             Buzón de ideas
           </a>
@@ -65,9 +72,15 @@ export default function Header() {
             {link.label}
           </a>
         ))}
-        <Link href={FORO.href} onClick={() => setOpen(false)}>
-          {FORO.label}
-        </Link>
+        {RUTAS.map((ruta) => (
+          <Link
+            key={ruta.href}
+            href={ruta.href}
+            onClick={() => setOpen(false)}
+          >
+            {ruta.label}
+          </Link>
+        ))}
         <a href="#buzon" onClick={() => setOpen(false)}>
           Buzón de ideas
         </a>

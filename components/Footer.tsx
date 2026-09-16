@@ -1,3 +1,12 @@
+import Link from "next/link";
+
+/**
+ * Pie común a la portada y a las páginas internas.
+ *
+ * Las anclas van como "/#seccion" y no "#seccion": este pie también se
+ * renderiza en /calendario y /foro, donde un ancla suelta no llevaría a
+ * ninguna parte.
+ */
 export default function Footer() {
   return (
     <footer>
@@ -23,16 +32,17 @@ export default function Footer() {
 
           <div className="footer-col">
             <h5>Plataforma</h5>
-            <a href="#propuestas">Propuestas</a>
-            <a href="#nombre">El nombre</a>
-            <a href="#objetivos">Objetivos</a>
+            <Link href="/#propuestas">Propuestas</Link>
+            <Link href="/#nombre">El nombre</Link>
+            <Link href="/#objetivos">Objetivos</Link>
+            <Link href="/calendario">Calendario</Link>
           </div>
 
           <div className="footer-col">
             <h5>Comunidad</h5>
-            <a href="#buzon">Buzón de ideas</a>
-            <a href="#foro">Foro (próximamente)</a>
-            <a href="#objetivos">Sobre el consejo</a>
+            <Link href="/#buzon">Buzón de ideas</Link>
+            <Link href="/foro">RED ASTRA</Link>
+            <Link href="/#consejo">Sobre el consejo</Link>
           </div>
         </div>
 

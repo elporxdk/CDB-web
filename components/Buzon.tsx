@@ -22,10 +22,11 @@ export default function Buzon() {
         </div>
         <div className="buzon-mascot">
           <Image
-            src="/mascot-small.webp"
-            alt="Mascota de Di Astrea sosteniendo un libro"
-            width={164}
-            height={200}
+            src="/Aguila3.png"
+            alt="Águila de Di Astrea"
+            width={2508}
+            height={2508}
+            priority={false}
           />
         </div>
       </div>

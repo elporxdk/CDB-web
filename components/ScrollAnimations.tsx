@@ -316,6 +316,42 @@ export default function ScrollAnimations() {
         ease: "sine.inOut",
       });
 
+      // Vista previa del calendario. Los selectores cubren los dos estados:
+      // con la agenda abierta existen la rejilla y la lista de fechas; con la
+      // agenda bloqueada solo el aviso. gsap.from sobre una lista vacía no
+      // hace nada, así que no hace falta ramificar.
+      gsap.from(".cal-preview-mes", {
+        opacity: 0,
+        y: 30,
+        scale: 0.97,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: { trigger: ".cal-preview-grid", start: "top 82%" },
+      });
+      gsap.from(".cal-preview-lista li", {
+        opacity: 0,
+        x: 28,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: "power2.out",
+        scrollTrigger: { trigger: ".cal-preview-grid", start: "top 80%" },
+      });
+      gsap.from(".cal-bloqueo-aviso > *", {
+        opacity: 0,
+        y: 24,
+        duration: 0.6,
+        stagger: 0.09,
+        ease: "power2.out",
+        scrollTrigger: { trigger: ".cal-bloqueo", start: "top 80%" },
+      });
+      gsap.from(".cal-bloqueo-fondo", {
+        opacity: 0,
+        scale: 1.04,
+        duration: 1.2,
+        ease: "power2.out",
+        scrollTrigger: { trigger: ".cal-bloqueo", start: "top 85%" },
+      });
+
       // Próximamente — foro de Di Astrea.
       gsap.from(".coming-soon-badge", {
         opacity: 0,

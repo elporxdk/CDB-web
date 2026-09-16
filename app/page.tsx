@@ -5,6 +5,7 @@ import Proposals from "@/components/Proposals";
 import NameStory from "@/components/NameStory";
 import Objectives from "@/components/Objectives";
 import Statement from "@/components/Statement";
+import CalendarioPreview from "@/components/CalendarioPreview";
 import Buzon from "@/components/Buzon";
 import ComingSoon from "@/components/ComingSoon";
 import Footer from "@/components/Footer";
@@ -22,6 +23,7 @@ export default function Home() {
         <Proposals />
         <NameStory />
         <Objectives />
+        <CalendarioPreview />
         <Buzon />
         <ComingSoon />
       </main>

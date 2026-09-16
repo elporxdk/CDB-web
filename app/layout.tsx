@@ -29,7 +29,13 @@ export default function RootLayout({
   children: ReactNode;
 }) {
   return (
-    <html lang="es" className={`${unbounded.variable} ${manrope.variable}`}>
+    // data-scroll-behavior evita que el scroll suave del CSS se aplique al
+    // cambiar de ruta: sin esto, ir a /calendario animaba el salto al inicio.
+    <html
+      lang="es"
+      data-scroll-behavior="smooth"
+      className={`${unbounded.variable} ${manrope.variable}`}
+    >
       <body>
         <div className="stars-bg" aria-hidden="true" />
         {children}
