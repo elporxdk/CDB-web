@@ -97,6 +97,13 @@ export const areas: AreaBlock[] = [
         status: "en-desarrollo",
         image: "/PadrinosLectores.jpg",
       },
+      {
+        title: "Festival de talentos",
+        description:
+          "Apoyo estudiantil en el montaje y la animación del Festival de Talentos de Primera Infancia.",
+        status: "en-desarrollo",
+        image: "/Talentos.jpg",
+      },
     ],
   },
   {
@@ -117,6 +124,20 @@ export const areas: AreaBlock[] = [
           "Olimpiadas internas y concursos de conocimiento de multiples rubros entre secciones, sumando puntaje para la Cioa",
         status: "en-desarrollo",
         image: "/RetoAcademico.jpg",
+      },
+      {
+        title: "E-SPORTS",
+        description:
+          "Crear un espacio para torneos de distintos videojuegos en los recesos, con inscripción voluntaria, reglamento, un docente a cargo y una gran final en un evento del colegio.",
+        status: "en-desarrollo",
+        image: "/Esports.png",
+      },
+      {
+        title: "Cuentas claras",
+        description:
+          "Informe trimestral público con el estado de cada acción, un delegado por sección con reunión mensual y acta de traspaso al siguiente Consejo.",
+        status: "en-desarrollo",
+        image: "/Cuentas.jpg",
       },
     ],
   },
