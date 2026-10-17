@@ -230,7 +230,7 @@ export function VistaCalendario() {
 
             <p className="cal-nota">
               ¿Falta algo que deberíamos agendar?{" "}
-              <Link href="/#buzon">Dilo en el buzón</Link>.
+              <Link href="/#enviar-propuesta">Envíanos una propuesta</Link>.
             </p>
           </aside>
         </div>

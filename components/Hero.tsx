@@ -7,20 +7,20 @@ export default function Hero() {
         <div>
           <p className="eyebrow">
             <span className="dot" />
-            Consejo estudiantil, Colegio Don Bosco 2027
+            Sitio oficial del Consejo Estudiantil · Colegio Don Bosco
           </p>
           <h1>La justicia no se hereda: se construye entre todos.</h1>
           <p className="sub">
-            Di Astrea es el espacio donde el consejo estudiantil muestra lo
-            que hace, cómo lo hace y en qué va cada proyecto. Sin letra
-            pequeña, sin promesas sueltas.
+            Este es el portal del Consejo Estudiantil Di Astrea: aquí se
+            publica lo que hacemos, cómo lo hacemos y en qué va cada
+            proyecto. Y aquí puedes enviarnos tus propuestas.
           </p>
           <div className="cta-row">
-            <a href="#propuestas" className="btn-primary">
-              Ver las propuestas
+            <a href="#enviar-propuesta" className="btn-primary">
+              Enviar una propuesta
             </a>
-            <a href="#buzon" className="btn-ghost">
-              Enviar mi idea
+            <a href="#propuestas" className="btn-ghost">
+              Ver los proyectos
             </a>
           </div>
         </div>
@@ -32,7 +32,7 @@ export default function Hero() {
             fill="none"
             aria-hidden="true"
           >
-            <g stroke="#D4A72C" strokeWidth={1} opacity={0.55}>
+            <g className="constelacion-trazos" strokeWidth={1} opacity={0.55}>
               <line x1="60" y1="70" x2="120" y2="40" />
               <line x1="120" y1="40" x2="200" y2="60" />
               <line x1="200" y1="60" x2="270" y2="30" />
@@ -45,7 +45,7 @@ export default function Hero() {
               <line x1="310" y1="260" x2="250" y2="330" />
               <line x1="110" y1="320" x2="250" y2="330" />
             </g>
-            <g fill="#F2D479">
+            <g className="constelacion-estrellas">
               <circle cx="60" cy="70" r="3" />
               <circle cx="120" cy="40" r="2.4" />
               <circle cx="200" cy="60" r="3.4" />

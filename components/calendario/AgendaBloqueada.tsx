@@ -6,7 +6,7 @@ import { RejillaMes } from "@/components/calendario/RejillaMes";
 const SIN_EVENTOS = new Map<string, Evento[]>();
 
 /**
- * Estado bloqueado del calendario.
+ * Calendario mientras la agenda aún no está publicada.
  *
  * Detrás del aviso se deja la cuadrícula del mes en curso, atenuada y sin
  * fechas: enseña la forma de lo que viene sin prometer nada concreto. La
@@ -36,37 +36,36 @@ export function AgendaBloqueada({
       </div>
 
       <div className="cal-bloqueo-aviso">
-        <span className="cal-candado" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6}>
-            <rect x="4.5" y="10.5" width="15" height="10" rx="2" />
-            <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" />
-            <circle cx="12" cy="15.5" r="1.3" fill="currentColor" stroke="none" />
+        <span className="cal-icono-agenda" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round">
+            <rect x="3.5" y="5" width="17" height="15.5" rx="2" />
+            <path d="M3.5 9.5h17M8 3v4M16 3v4" />
+            <path d="M12 12.6v2.6l1.8 1.1" />
           </svg>
         </span>
 
-        <p className="cal-bloqueo-badge">En construcción</p>
+        <p className="cal-bloqueo-badge">En preparación</p>
 
-        <h3>Este calendario se llena con tu voto.</h3>
+        <h3>La agenda oficial se publica muy pronto.</h3>
 
         <p className="cal-bloqueo-texto">
-          Cada actividad del plan de trabajo ya está pensada: los torneos, los
-          informes trimestrales, el festival, la feria técnica. Lo único que
-          falta para ponerles fecha, hora y lugar es que el proyecto siga en
-          pie.
+          El Consejo está cerrando la fecha, la hora y el lugar de cada
+          actividad del plan de trabajo: los torneos, los informes
+          trimestrales, el festival y la feria técnica.
         </p>
 
         <p className="cal-bloqueo-texto">
-          <strong>Vota por el Amarillo</strong> y este espacio deja de estar
-          vacío: se convierte en la agenda pública que podrás exigirnos día por
-          día.
+          En cuanto estén confirmadas aparecerán aquí, y este calendario será
+          la agenda pública con la que podrás <strong>pedirnos cuentas día
+          por día</strong>.
         </p>
 
         <div className="cal-bloqueo-acciones">
-          <Link href="/#buzon" className="btn-primary">
-            Quiero apoyar el proyecto
+          <Link href="/#enviar-propuesta" className="btn-primary">
+            Enviar una propuesta
           </Link>
           <Link href="/#propuestas" className="btn-ghost">
-            Ver las propuestas
+            Ver los proyectos
           </Link>
         </div>
       </div>
