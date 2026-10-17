@@ -24,14 +24,56 @@ import { validarPropuesta, type Propuesta } from "@/lib/propuestas";
 const API_RESEND = "https://api.resend.com/emails";
 const REMITENTE_PRUEBAS = "Propuestas Di Astrea <onboarding@resend.dev>";
 
+// Se evalúa en cada petición con el entorno real del Worker. Sobre todo por el
+// GET de diagnóstico: si Next lo prerenderizara al compilar, reflejaría el
+// entorno del build —donde los secretos no existen— y diría siempre «falta».
+export const dynamic = "force-dynamic";
+
+/**
+ * Las dos variables, sin espacios sobrantes (un espacio pegado por error al
+ * final de la clave haría que Resend la rechazara).
+ */
+function leerConfiguracion() {
+  const clave = process.env.RESEND_API_KEY?.trim() || undefined;
+  const destino = process.env.CORREO_CONSEJO?.trim() || undefined;
+  return { clave, destino };
+}
+
+/**
+ * Diagnóstico para quien administra el sitio: abrir /api/propuestas en el
+ * navegador dice si el Worker tiene las dos variables y si tienen la forma
+ * esperada. NUNCA devuelve los valores, solo su estado.
+ */
+export function GET() {
+  const { clave, destino } = leerConfiguracion();
+  return Response.json(
+    {
+      buzon: clave && destino ? "activo" : "inactivo",
+      RESEND_API_KEY: revisar(process.env.RESEND_API_KEY, (v) => v.startsWith("re_"), "no parece una clave de Resend: debería empezar por re_"),
+      CORREO_CONSEJO: revisar(process.env.CORREO_CONSEJO, (v) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v), "no parece una dirección de correo"),
+      ayuda:
+        "Si alguna dice «falta», añádela en Cloudflare → Workers & Pages → cdb-web → Settings → Variables and Secrets (no en Build), tipo Secret.",
+    },
+    { headers: { "Cache-Control": "no-store" } }
+  );
+}
+
+function revisar(valor: string | undefined, formaCorrecta: (v: string) => boolean, pista: string): string {
+  if (valor === undefined) return "falta";
+  const limpio = valor.trim();
+  if (limpio === "") return "existe pero está vacía";
+  if (/^["'].*["']$/.test(limpio)) return "tiene comillas alrededor: vuelve a pegarla sin ellas";
+  return formaCorrecta(limpio) ? "configurada" : `configurada, pero ${pista}`;
+}
+
 export async function POST(request: Request) {
-  const clave = process.env.RESEND_API_KEY;
-  const destino = process.env.CORREO_CONSEJO;
+  const { clave, destino } = leerConfiguracion();
 
   // Sin configurar, se dice claramente. Lo peor que podría pasar aquí es lo que
   // hacía la versión anterior: decirle al estudiante que se envió.
   if (!clave || !destino) {
-    console.error("Propuestas: faltan RESEND_API_KEY y/o CORREO_CONSEJO en el Worker.");
+    const faltan = [!clave && "RESEND_API_KEY", !destino && "CORREO_CONSEJO"].filter(Boolean).join(" y ");
+    console.error(`Propuestas: el Worker no tiene ${faltan} en sus variables de ejecución.`);
     return Response.json(
       { error: "El buzón de propuestas todavía no está activo. Inténtalo más tarde." },
       { status: 503 }
