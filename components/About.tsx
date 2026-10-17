@@ -1,4 +1,10 @@
 import Image from "next/image";
+import { areas } from "@/lib/proposals";
+
+// Se cuentan de los datos y no se escriben a mano: el número estaba fijo en 10
+// y quedó desfasado en cuanto se añadieron propuestas (hoy son 15).
+const TOTAL_AREAS = areas.length;
+const TOTAL_PROPUESTAS = areas.reduce((n, area) => n + area.proposals.length, 0);
 
 export default function About() {
   return (
@@ -42,11 +48,11 @@ export default function About() {
 
         <div className="stat-row">
           <div className="stat">
-            <b>5</b>
+            <b>{TOTAL_AREAS}</b>
             <span>Áreas de trabajo activas</span>
           </div>
           <div className="stat">
-            <b>10</b>
+            <b>{TOTAL_PROPUESTAS}</b>
             <span>Propuestas en registro</span>
           </div>
           <div className="stat">

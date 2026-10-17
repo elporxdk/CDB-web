@@ -45,8 +45,8 @@ export const CATEGORIAS: Record<
 /**
  * Interruptor de la agenda.
  *
- * Mientras esté en `true` el calendario se muestra bloqueado: la cuadrícula
- * sale de fondo pero sin fechas, con el aviso de que se activa con el voto.
+ * Mientras esté en `true` la agenda sale como «en preparación»: la cuadrícula
+ * de fondo pero sin fechas, con el aviso de que se publica pronto.
  * Para publicar la agenda basta con llenar `eventos` y pasarlo a `false`; toda
  * la maquinaria de rejilla, filtros y fichas sigue intacta debajo.
  */

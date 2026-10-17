@@ -21,7 +21,7 @@ export default function NameStory() {
                 fill="none"
                 aria-hidden="true"
               >
-                <g stroke="#D4A72C" strokeWidth={1.1} opacity={0.7}>
+                <g className="constelacion-trazos" strokeWidth={1.1} opacity={0.7}>
                   <line x1="150" y1="30" x2="110" y2="80" />
                   <line x1="110" y1="80" x2="130" y2="140" />
                   <line x1="130" y1="140" x2="90" y2="180" />
@@ -32,7 +32,7 @@ export default function NameStory() {
                   <line x1="190" y1="220" x2="230" y2="260" />
                   <line x1="90" y1="180" x2="60" y2="240" />
                 </g>
-                <g fill="#F2D479">
+                <g className="constelacion-estrellas">
                   <circle cx="150" cy="30" r="3.2" />
                   <circle cx="110" cy="80" r="2.6" />
                   <circle cx="130" cy="140" r="3.6" />

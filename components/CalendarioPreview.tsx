@@ -35,10 +35,10 @@ export default function CalendarioPreview() {
           </p>
           {AGENDA_BLOQUEADA ? (
             <>
-              <h2>La agenda del Consejo, en camino.</h2>
+              <h2>La agenda del Consejo, en preparación.</h2>
               <p>
-                Aquí va a quedar cada actividad con su fecha. Todavía no está
-                abierta, y depende de algo muy concreto.
+                Aquí va a quedar cada actividad con su fecha, su hora y su
+                lugar, en cuanto estén confirmadas.
               </p>
             </>
           ) : (

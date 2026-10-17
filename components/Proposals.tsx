@@ -35,10 +35,10 @@ export default function Proposals() {
             <span className="dot" />
             Lo que se está trabajando
           </p>
-          <h2>Propuestas del consejo</h2>
+          <h2>Propuestas del Consejo</h2>
           <p>
-            Cinco áreas, dos propuestas concretas por área como mínimo. Cada
-            una con su estado real: aprobada, en desarrollo o denegada.
+            El plan de trabajo del Consejo, área por área. Cada propuesta
+            con su estado real: aprobada, en desarrollo o denegada.
           </p>
         </div>
 
@@ -69,17 +69,9 @@ export default function Proposals() {
             </div>
 
             <div className="proposal-grid">
-              {area.proposals.map((proposal, i) => (
+              {area.proposals.map((proposal) => (
                 <div className="card" key={proposal.title}>
-                  <div
-                    className="card-photo"
-                    style={{
-                      background:
-                        i % 2 === 0
-                          ? "linear-gradient(150deg,#1D275E,#131A45)"
-                          : "linear-gradient(150deg,#2A3777,#1D275E)",
-                    }}
-                  >
+                  <div className="card-photo">
                     {proposal.image ? (
                       <Image
                         src={proposal.image}

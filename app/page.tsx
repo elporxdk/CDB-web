@@ -6,7 +6,7 @@ import NameStory from "@/components/NameStory";
 import Objectives from "@/components/Objectives";
 import Statement from "@/components/Statement";
 import CalendarioPreview from "@/components/CalendarioPreview";
-import Buzon from "@/components/Buzon";
+import EnviarPropuesta from "@/components/EnviarPropuesta";
 import ComingSoon from "@/components/ComingSoon";
 import Footer from "@/components/Footer";
 import ScrollAnimations from "@/components/ScrollAnimations";
@@ -24,7 +24,7 @@ export default function Home() {
         <NameStory />
         <Objectives />
         <CalendarioPreview />
-        <Buzon />
+        <EnviarPropuesta />
         <ComingSoon />
       </main>
       <Footer />

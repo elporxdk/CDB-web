@@ -38,7 +38,7 @@ export default function Objectives() {
             <span className="dot" />
             Plan de trabajo
           </p>
-          <h2>Objetivos de la fórmula</h2>
+          <h2>Objetivos del Consejo</h2>
         </div>
 
         <div className="tilt-stage">
@@ -63,7 +63,7 @@ export default function Objectives() {
           {SPECIFIC_OBJECTIVES.map((obj) => (
             <div className="specific-item" key={obj.title}>
               <div className="icon-box">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#F2D479" strokeWidth={1.7} aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} aria-hidden="true">
                   {obj.icon}
                 </svg>
               </div>

@@ -48,7 +48,7 @@ export default function AreaIcon({ id, className }: AreaIconProps) {
       className={className}
       viewBox="0 0 24 24"
       fill="none"
-      stroke="#F2D479"
+      stroke="currentColor"
       strokeWidth={1.6}
       aria-hidden="true"
     >
