@@ -18,9 +18,17 @@
 	},
 	"observability": {
 		"enabled": true
-	}
-	// The site is fully prerendered, so it needs neither the R2 incremental cache
-	// nor the revalidation queue. If ISR / on-demand revalidation is added later,
+	},
+	// Conserva las variables y los secretos configurados en el panel de
+	// Cloudflare (RESEND_API_KEY, CORREO_CONSEJO) en cada despliegue. Sin esto,
+	// wrangler trata este archivo como la única fuente de verdad y en el
+	// siguiente deploy borra las variables de texto puestas en el panel, y
+	// tampoco pide conservar los secretos (en `wrangler deploy`, keepSecrets
+	// solo se activa junto con keep_vars).
+	"keep_vars": true
+	// The pages are prerendered and /api/propuestas is a plain dynamic route with
+	// no ISR, so the site needs neither the R2 incremental cache nor the
+	// revalidation queue. If ISR / on-demand revalidation is added later,
 	// set up caching as described in https://opennext.js.org/cloudflare/caching and
 	// add the self-reference service binding, whose "service" MUST be "cdb-web":
 	//
