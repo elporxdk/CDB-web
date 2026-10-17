@@ -21,8 +21,9 @@ const ORDEN: CampoPropuesta[] = ["nombre", "grado", "propuesta"];
 /**
  * Formulario nativo para que el estudiantado envíe propuestas al Consejo.
  *
- * Sustituye al enlace a Google Forms. La validación y el envío viven en
- * lib/propuestas.ts; aquí solo hay estado de interfaz.
+ * Sustituye al enlace a Google Forms. Cada propuesta llega por correo al
+ * buzón del Consejo (ver app/api/propuestas/route.ts). La validación y el envío
+ * viven en lib/propuestas.ts; aquí solo hay estado de interfaz.
  *
  * Los errores no aparecen mientras se escribe por primera vez: salen al
  * intentar enviar, y a partir de ahí se recalculan con cada tecla para que
@@ -66,13 +67,20 @@ export default function EnviarPropuesta() {
       return;
     }
 
+    // El campo trampa no está en el estado de React: se lee del DOM al enviar,
+    // que es justo donde lo habrá escrito un bot.
+    const trampa = String(new FormData(e.currentTarget).get("sitio_web") ?? "");
+
     setEstado("enviando");
     try {
-      await enviarPropuesta({
-        nombre: valores.nombre.trim(),
-        grado: valores.grado.trim(),
-        propuesta: valores.propuesta.trim(),
-      });
+      await enviarPropuesta(
+        {
+          nombre: valores.nombre.trim(),
+          grado: valores.grado.trim(),
+          propuesta: valores.propuesta.trim(),
+        },
+        trampa
+      );
       setValores(VACIA);
       setErrores({});
       setIntentado(false);
@@ -199,6 +207,15 @@ export default function EnviarPropuesta() {
             </div>
           </div>
 
+          {/* Trampa para bots: fuera de la pantalla, fuera del orden de
+              tabulación y oculta a los lectores de pantalla. Una persona no la
+              rellena nunca. No se usa display:none porque algunos bots se
+              saltan los campos que lo llevan. */}
+          <div className="campo-trampa" aria-hidden="true">
+            <label htmlFor={`${id}-sitio`}>Sitio web (déjalo vacío)</label>
+            <input id={`${id}-sitio`} name="sitio_web" type="text" tabIndex={-1} autoComplete="off" />
+          </div>
+
           <div className="form-pie">
             <button type="submit" className="btn-primary" disabled={estado === "enviando"}>
               {estado === "enviando" ? "Enviando…" : "Enviar propuesta"}
@@ -216,8 +233,8 @@ export default function EnviarPropuesta() {
                 </svg>
                 <div>
                   <strong>Propuesta enviada con éxito</strong>
-                  Gracias por tomarte el tiempo de escribirla. Puedes enviar
-                  otra cuando quieras.
+                  Ya va camino del correo del Consejo. Gracias por tomarte el
+                  tiempo de escribirla; puedes enviar otra cuando quieras.
                 </div>
               </div>
             )}

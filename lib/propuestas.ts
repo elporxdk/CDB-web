@@ -1,9 +1,9 @@
 /**
  * Propuestas del estudiantado: validación y envío.
  *
- * Separado del formulario para que las reglas vivan en un solo sitio. Cuando
- * exista un backend, este fichero es lo único que hay que tocar: el formulario
- * no sabe ni le importa adónde va la propuesta.
+ * Las reglas de validación viven aquí y las usan los DOS lados: el formulario,
+ * para avisar antes de enviar, y la ruta app/api/propuestas, que es la que de
+ * verdad decide. Así no pueden discrepar.
  */
 
 export interface Propuesta {
@@ -36,6 +36,8 @@ export function validarPropuesta(datos: Propuesta): ErroresPropuesta {
 
   if (!nombre) {
     errores.nombre = "Escribe tu nombre completo.";
+  } else if (nombre.length > LIMITES.nombre.max) {
+    errores.nombre = `El nombre no puede pasar de ${LIMITES.nombre.max} caracteres.`;
   } else if (nombre.split(/\s+/).length < 2) {
     // El campo pide el nombre completo: sin apellido el Consejo no puede saber
     // de quién es la propuesta si hay dos estudiantes con el mismo nombre.
@@ -46,10 +48,14 @@ export function validarPropuesta(datos: Propuesta): ErroresPropuesta {
 
   if (grado.length < LIMITES.grado.min) {
     errores.grado = "Indica tu grado o especialidad.";
+  } else if (grado.length > LIMITES.grado.max) {
+    errores.grado = `No puede pasar de ${LIMITES.grado.max} caracteres.`;
   }
 
   if (!propuesta) {
     errores.propuesta = "Escribe tu propuesta.";
+  } else if (propuesta.length > LIMITES.propuesta.max) {
+    errores.propuesta = `La propuesta no puede pasar de ${LIMITES.propuesta.max} caracteres.`;
   } else if (propuesta.length < LIMITES.propuesta.min) {
     const faltan = LIMITES.propuesta.min - propuesta.length;
     errores.propuesta = `Cuéntanos un poco más: faltan ${faltan} caracter${faltan === 1 ? "" : "es"}.`;
@@ -59,29 +65,47 @@ export function validarPropuesta(datos: Propuesta): ErroresPropuesta {
 }
 
 /**
- * Envía una propuesta.
+ * Envía una propuesta al Consejo.
  *
- * ⚠️  HOY NO ENVÍA A NINGÚN SITIO.
+ * La manda a la ruta /api/propuestas, que corre en el Worker de Cloudflare y la
+ * reenvía por correo al buzón del Consejo con Resend. La clave de Resend vive
+ * solo en el servidor; desde aquí no se ve.
  *
- * Esta fase se pidió solo con lógica de interfaz: el formulario valida, muestra
- * «Propuesta enviada con éxito» y se limpia. Pero no existe todavía dónde
- * guardar las propuestas, así que lo que escribe el estudiante NO le llega al
- * Consejo: se descarta al limpiar el formulario.
+ * `trampa` es el valor del campo oculto del formulario. Una persona nunca lo
+ * rellena porque no lo ve; los bots que llenan todo lo que encuentran, sí. El
+ * servidor descarta en silencio lo que llegue con ese campo escrito.
  *
- * No publiques este formulario ante el estudiantado hasta conectar esta
- * función. Quien envíe una propuesta verá que «se envió con éxito» y dará por
- * hecho que el Consejo la recibió.
- *
- * Para conectarla basta con sustituir el cuerpo por la llamada real (por
- * ejemplo, un `fetch` a una ruta /api/propuestas que la guarde en Cloudflare
- * D1) y lanzar un Error si falla: el formulario ya muestra el error y conserva
- * lo escrito para que no se pierda.
+ * Si algo falla, lanza un Error con un mensaje que se puede enseñar tal cual:
+ * el formulario lo muestra y conserva lo escrito.
  */
-export async function enviarPropuesta(datos: Propuesta): Promise<void> {
-  // La validación se repite aquí aunque el formulario ya la haya hecho: esta
-  // función será la puerta de entrada al backend y no debe fiarse de quien la
-  // llama.
+export async function enviarPropuesta(datos: Propuesta, trampa = ""): Promise<void> {
+  // Se valida aquí también para no gastar una petición en algo que el servidor
+  // va a rechazar. Pero quien decide es el servidor, no esto.
   if (Object.keys(validarPropuesta(datos)).length > 0) {
     throw new Error("Revisa los campos marcados antes de enviar.");
+  }
+
+  let respuesta: Response;
+  try {
+    respuesta = await fetch("/api/propuestas", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...datos, sitio_web: trampa }),
+    });
+  } catch {
+    throw new Error("No hay conexión. Revisa tu internet e inténtalo de nuevo.");
+  }
+
+  if (!respuesta.ok) {
+    let mensaje = "No se pudo enviar la propuesta. Inténtalo de nuevo en unos minutos.";
+    try {
+      const cuerpo: unknown = await respuesta.json();
+      if (cuerpo && typeof cuerpo === "object" && "error" in cuerpo && typeof cuerpo.error === "string") {
+        mensaje = cuerpo.error;
+      }
+    } catch {
+      // Respuesta sin JSON (p. ej. una página de error de Cloudflare): mensaje genérico.
+    }
+    throw new Error(mensaje);
   }
 }

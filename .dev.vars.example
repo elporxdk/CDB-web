@@ -1,0 +1,15 @@
+# Variables para probar el envío de propuestas en local con `npm run preview`
+# (wrangler). Copia este archivo a `.dev.vars`, que está en .gitignore.
+#
+# En producción NO van aquí: se definen como «Secret» en el panel de
+# Cloudflare → Workers & Pages → cdb-web → Settings → Variables and Secrets.
+
+# Clave de la API de Resend (empieza por re_). https://resend.com/api-keys
+RESEND_API_KEY=
+
+# Buzón que recibe las propuestas. Mientras no verifiquen un dominio en Resend,
+# TIENE que ser el mismo correo con el que crearon la cuenta de Resend.
+CORREO_CONSEJO=
+
+# Opcional, solo con un dominio verificado en Resend:
+# CORREO_REMITENTE=Propuestas Di Astrea <propuestas@tu-dominio>

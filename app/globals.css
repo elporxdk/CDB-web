@@ -2041,6 +2041,14 @@ button.cal-dia:hover {
 .contador.cerca {
   color: var(--accent-text);
 }
+/* Campo trampa para bots (ver EnviarPropuesta.tsx). */
+.campo-trampa {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
 .form-pie {
   margin-top: 8px;
   display: flex;
